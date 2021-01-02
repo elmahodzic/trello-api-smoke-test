@@ -10,7 +10,7 @@ For variable email you must replace dummy_email@gmail.com with email address fro
 Postman is a lightweight tool the interact with Web Services. For download Postman application go to https://www.postman.com/downloads/ 
 ## Newman installation
 For Newman installation, first you must be ensure that you have Node.js >= v10. <a href ="https://nodejs.org/en/download/package-manager/">Install Node.js via package manager.</a> <br />
-The easiest way to install Newman is using NPM.
+The easiest way to install Newman is using NPM.<br />
 For install newman globally on your system, run `$ npm install -g newman`
 ## Usage 
  After you export your Postman Collection as a json file from the Postman App, you can run it using Newman with <br />
