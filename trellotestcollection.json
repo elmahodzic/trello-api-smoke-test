@@ -1,0 +1,3062 @@
+{
+	"info": {
+		"_postman_id": "649cf3c7-b375-4c6e-8a00-21d45d881d38",
+		"name": "ELMA'S BOARD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CREATE A BOARD",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if name of board is correct'\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(\"ELMA'S BOARD\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Collect id from the response\", function () {\r",
+							"    pm.globals.set(\"board_id\", jsonData.id); \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Collect url from the response\", function () {\r",
+							"    pm.globals.set(\"url_board\", jsonData.url); \r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response body has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.descData).to.be.null;\r",
+							"    pm.expect(jsonData.idEnterprise).to.be.null;\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/boards/?name=ELMA'S BOARD&key={{trelloKey}}&token={{trelloToken}}&defaultLists=false",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"boards",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "ELMA'S BOARD"
+						},
+						{
+							"key": "key",
+							"value": "{{trelloKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}"
+						},
+						{
+							"key": "defaultLists",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checking of board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"const url_board = pm.globals.get(\"url_board\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if name of board is 'ELMA'S BOARD'\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(\"ELMA'S BOARD\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Collect id from the response\", function () {\r",
+							"    pm.globals.set(\"board_id\", jsonData.id); \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if url is correct\", function () {\r",
+							"    pm.expect(jsonData.url).to.eql(url_board);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.idEnterprise).to.be.null;\r",
+							"    pm.expect(jsonData.descData).to.be.null;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/boards/{{board_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{board_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a list DONE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"const board_id = pm.globals.get(\"board_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if name of board is 'DONE'\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(\"DONE\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Collect id from the response\", function () {\r",
+							"    pm.globals.set(\"done_id\",jsonData.id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list has been created in the correct board\", function () {\r",
+							"    pm.expect(jsonData.idBoard).to.eql(board_id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.pos).to.be.a('number');\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Date is in header\", function () {\r",
+							"   pm.response.to.have.header(\"Date\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"   pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"X-Trello-Environment is correct\", function () {\r",
+							"   pm.response.to.have.header(\"X-Trello-Environment\");\r",
+							"   pm.response.to.be.header(\"X-Trello-Environment\", \"Production\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Transfer-Encoding is chunked\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Transfer-Encoding')).to.eql('chunked');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists?name=DONE&idBoard={{board_id}}&key={{trelloKey}}&token={{trelloToken}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "DONE"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{board_id}}"
+						},
+						{
+							"key": "key",
+							"value": "{{trelloKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checking of list DONE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"const board_id = pm.globals.get(\"board_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if name of board is 'DONE'\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(\"DONE\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list has been created in the correct board\", function () {\r",
+							"    pm.expect(jsonData.idBoard).to.eql(board_id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.pos).to.be.a('number');\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"X-Trello-Environment is correct\", function () {\r",
+							"   pm.response.to.have.header(\"X-Trello-Environment\");\r",
+							"   pm.response.to.be.header(\"X-Trello-Environment\", \"Production\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Transfer-Encoding is chunked\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Transfer-Encoding')).to.eql('chunked');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists/{{done_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"lists",
+						"{{done_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a list REVIEW",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"const board_id = pm.globals.get(\"board_id\");\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if name of board is 'REVIEW'\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(\"REVIEW\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Collect id from the response\", function () {\r",
+							"    pm.globals.set(\"review_id\",jsonData.id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list has been created in the correct board\", function () {\r",
+							"    pm.expect(jsonData.idBoard).to.eql(board_id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.pos).to.be.a('number');\r",
+							"    pm.expect(jsonData.closed).to.be.false;\r",
+							"});\r",
+							"pm.test(\"X-Frame-Options is in header\", function () {\r",
+							"   pm.response.to.have.header(\"X-Frame-Options\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"X-Rate-Limit-Api-Key-Interval-Ms\", () => {\r",
+							"  pm.expect(pm.response.headers.get('X-Rate-Limit-Api-Key-Interval-Ms')).to.eql('10000');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists?name=REVIEW&idBoard={{board_id}}&key={{trelloKey}}&token={{trelloToken}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "REVIEW"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{board_id}}"
+						},
+						{
+							"key": "key",
+							"value": "{{trelloKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checking of list REVIEW",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"const board_id = pm.globals.get(\"board_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if name of board is 'REVIEW'\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(\"REVIEW\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list has been created in the correct board\", function () {\r",
+							"    pm.expect(jsonData.idBoard).to.eql(board_id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.pos).to.be.a('number');\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Server is correct\", function () {\r",
+							"   pm.response.to.have.header(\"Server\");\r",
+							"   pm.response.to.be.header(\"Server\", \"globaledge-envoy\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"X-Content-Type-Options is nosniff\", () => {\r",
+							"  pm.expect(pm.response.headers.get('X-Content-Type-Options')).to.eql('nosniff');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists/{{review_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"lists",
+						"{{review_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a list IN PROGRESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"const board_id = pm.globals.get(\"board_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if name of board is 'IN PROGRESS'\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(\"IN PROGRESS\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Collect id from the response\", function () {\r",
+							"    pm.globals.set(\"inprogress_id\",jsonData.id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list has been created in the correct board\", function () {\r",
+							"    pm.expect(jsonData.idBoard).to.eql(board_id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.pos).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json; charset=utf-8\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Server header is globaledge-envoy\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Server')).to.eql('globaledge-envoy');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists?name=IN PROGRESS&idBoard={{board_id}}&key={{trelloKey}}&token={{trelloToken}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "IN PROGRESS"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{board_id}}"
+						},
+						{
+							"key": "key",
+							"value": "{{trelloKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checking of list IN PROGRESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"const board_id = pm.globals.get(\"board_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if name of board is 'IN PROGRESS'\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(\"IN PROGRESS\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list has been created in the correct board\", function () {\r",
+							"    pm.expect(jsonData.idBoard).to.eql(board_id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.pos).to.be.a('number');\r",
+							"    pm.expect(jsonData.closed).to.be.false;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Encoding\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Encoding')).to.eql('gzip');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists/{{inprogress_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"lists",
+						"{{inprogress_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crate a list TODO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"const board_id = pm.globals.get(\"board_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if name of board is 'TODO'\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(\"TODO\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Collect id from the response\", function () {\r",
+							"    pm.globals.set(\"todo_id\",jsonData.id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list has been created in the correct board\", function () {\r",
+							"    pm.expect(jsonData.idBoard).to.eql(board_id);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.pos).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Referrer-Policy is correct\", function () {\r",
+							"   pm.response.to.have.header(\"Referrer-Policy\");\r",
+							"   pm.response.to.be.header(\"Referrer-Policy\", \"strict-origin-when-cross-origin\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists?name=TODO&idBoard={{board_id}}&key={{trelloKey}}&token={{trelloToken}}\n",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "TODO"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{board_id}}"
+						},
+						{
+							"key": "key",
+							"value": "{{trelloKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}\n"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checking of list TODO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"const board_id = pm.globals.get(\"board_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if name of board is 'TODO'\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(\"TODO\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list has been created in the correct board\", function () {\r",
+							"    pm.expect(jsonData.idBoard).to.eql(board_id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.pos).to.be.a('number');\r",
+							"    pm.expect(jsonData.closed).to.be.false;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"X-Frame-Options is DENY\", function () {\r",
+							"   pm.response.to.have.header(\"X-Frame-Options\");\r",
+							"   pm.response.to.be.header(\"X-Frame-Options\", \"DENY\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Checking of Access-Control-Allow-Methods\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Access-Control-Allow-Methods')).to.eql('GET, PUT, POST, DELETE');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists/{{todo_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"lists",
+						"{{todo_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a list Backlog",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"const board_id = pm.globals.get(\"board_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if name of board is 'BACKLOG'\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(\"BACKLOG\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Collect id from the response\", function () {\r",
+							"    pm.globals.set(\"backlog_id\",jsonData.id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list has been created in the correct board\", function () {\r",
+							"    pm.expect(jsonData.idBoard).to.eql(board_id);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.pos).to.be.a('number');\r",
+							"    pm.expect(jsonData.closed).to.be.false;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"   pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"X-Rate-Limit-Api-Key-Interval-Ms\", () => {\r",
+							"  pm.expect(pm.response.headers.get('X-Rate-Limit-Api-Key-Interval-Ms')).to.eql('10000');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists?name=BACKLOG&idBoard={{board_id}}&key={{trelloKey}}&token={{trelloToken}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "BACKLOG"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{board_id}}"
+						},
+						{
+							"key": "key",
+							"value": "{{trelloKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checking of list Backlog",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"const board_id = pm.globals.get(\"board_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if name of board is 'BACKLOG'\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(\"BACKLOG\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list has been created in the correct board\", function () {\r",
+							"    pm.expect(jsonData.idBoard).to.eql(board_id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.pos).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"X-Frame-Options is DENY\", function () {\r",
+							"   pm.response.to.have.header(\"X-Frame-Options\");\r",
+							"   pm.response.to.be.header(\"X-Frame-Options\", \"DENY\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Checking of Access-Control-Allow-Methods\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Access-Control-Allow-Methods')).to.eql('GET, PUT, POST, DELETE');\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists/{{backlog_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"lists",
+						"{{backlog_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a card  'Write Smoke test for Tello App'",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"const board_id = pm.globals.get(\"board_id\");\r",
+							"const todo_id = pm.globals.get(\"todo_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if name of card is 'Write Smoke test for Tello App'\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(\"Write Smoke test for Tello App\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Collect id from the response\", function () {\r",
+							"    pm.globals.set(\"writesmoketestcard_id\",jsonData.id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Collect url of 'Write smoke test' card from the response\", function () {\r",
+							"    pm.globals.set(\"writesmoketestcard_url\",jsonData.url);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list has been created in the correct board\", function () {\r",
+							"    pm.expect(jsonData.idBoard).to.eql(board_id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the card has been created on the correct list\", function () {\r",
+							"    pm.expect(jsonData.idList).to.eql(todo_id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.pos).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"X-Frame-Options is present\", function () {\r",
+							"   pm.response.to.have.header(\"X-Frame-Options\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"X-Frame-Options is DENY\", function () {\r",
+							"   pm.response.to.have.header(\"X-Frame-Options\");\r",
+							"   pm.response.to.be.header(\"X-Frame-Options\", \"DENY\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Checking of Access-Control-Allow-Methods\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Access-Control-Allow-Methods')).to.eql('GET, PUT, POST, DELETE');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/cards?name=Write Smoke test for Tello App&idList={{todo_id}}&key={{trelloKey}}&token={{trelloToken}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"cards"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Write Smoke test for Tello App"
+						},
+						{
+							"key": "idList",
+							"value": "{{todo_id}}"
+						},
+						{
+							"key": "key",
+							"value": "{{trelloKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checking of card Write Smoke test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"const board_id = pm.globals.get(\"board_id\");\r",
+							"const todo_id = pm.globals.get(\"todo_id\");\r",
+							"const writesmoketestcard_url = pm.globals.get(\"writesmoketestcard_url\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if name of card is 'Write Smoke test for Tello App'\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(\"Write Smoke test for Tello App\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Collect id from the response\", function () {\r",
+							"    pm.globals.set(\"writesmoketestcard_id\",jsonData.id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list has been created in the correct board\", function () {\r",
+							"    pm.expect(jsonData.idBoard).to.eql(board_id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the card has been created on the correct list\", function () {\r",
+							"    pm.expect(jsonData.idList).to.eql(todo_id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the url of 'Write smoke test' is correct\", function () {\r",
+							"    pm.expect(jsonData.url).to.eql(writesmoketestcard_url);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.pos).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"X-Frame-Options is present\", function () {\r",
+							"   pm.response.to.have.header(\"X-Frame-Options\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"X-Frame-Options is DENY\", function () {\r",
+							"   pm.response.to.have.header(\"X-Frame-Options\");\r",
+							"   pm.response.to.be.header(\"X-Frame-Options\", \"DENY\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Checking of Access-Control-Allow-Methods\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Access-Control-Allow-Methods')).to.eql('GET, PUT, POST, DELETE');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/card/{{writesmoketestcard_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"card",
+						"{{writesmoketestcard_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a card 'Execute the smoke test'",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"const board_id = pm.globals.get(\"board_id\");\r",
+							"const todo_id = pm.globals.get(\"todo_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if name of card is 'Execute the smoke test'\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(\"Execute the smoke test\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Collect id from the response\", function () {\r",
+							"    pm.globals.set(\"executesmoketest_id\",jsonData.id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list has been created in the correct board\", function () {\r",
+							"    pm.expect(jsonData.idBoard).to.eql(board_id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the card has been created on the correct list\", function () {\r",
+							"    pm.expect(jsonData.idList).to.eql(todo_id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Collect url of 'Execute smoke test' card\", function () {\r",
+							"    pm.globals.set(\"executesmoketest_url\",jsonData.url);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.pos).to.be.a('number');\r",
+							"    pm.expect(jsonData.idShort).to.be.a('number');\r",
+							"    pm.expect(jsonData.email).to.be.null;\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/cards?name=Execute the smoke test&idList={{todo_id}}&key={{trelloKey}}&token={{trelloToken}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"cards"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Execute the smoke test"
+						},
+						{
+							"key": "idList",
+							"value": "{{todo_id}}"
+						},
+						{
+							"key": "key",
+							"value": "{{trelloKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checking of card Execute Smoke Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"const board_id = pm.globals.get(\"board_id\");\r",
+							"const todo_id = pm.globals.get(\"todo_id\");\r",
+							"const executesmoketest_url = pm.globals.get(\"executesmoketest_url\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if name of card is 'Execute the smoke test'\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(\"Execute the smoke test\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Collect id from the response\", function () {\r",
+							"    pm.globals.set(\"executesmoketest_id\",jsonData.id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list has been created in the correct board\", function () {\r",
+							"    pm.expect(jsonData.idBoard).to.eql(board_id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the card has been created on the correct list\", function () {\r",
+							"    pm.expect(jsonData.idList).to.eql(todo_id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the url of 'Execute smoke test' is correct\", function () {\r",
+							"    pm.expect(jsonData.url).to.eql(executesmoketest_url);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.pos).to.be.a('number');\r",
+							"    pm.expect(jsonData.idShort).to.be.a('number');\r",
+							"    pm.expect(jsonData.email).to.be.null;\r",
+							"    pm.expect(jsonData.start).to.be.null;\r",
+							"    pm.expect(jsonData.subscribed).to.be.false;\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/card/{{executesmoketest_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"card",
+						"{{executesmoketest_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a list o the board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"const board_id = pm.globals.get(\"board_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if name of board is 'TO DO'\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(\"TO DO\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Collect id from the response\", function () {\r",
+							"    pm.globals.set(\"todo_id\",jsonData.id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list has been created in the correct board\", function () {\r",
+							"    pm.expect(jsonData.idBoard).to.eql(board_id);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.pos).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json; charset=utf-8\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Server header is globaledge-envoy\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Server')).to.eql('globaledge-envoy');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists/{{todo_id}}?name=TO DO&key={{trelloKey}}&token={{trelloToken}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"lists",
+						"{{todo_id}}"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "TO DO"
+						},
+						{
+							"key": "key",
+							"value": "{{trelloKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}"
+						},
+						{
+							"key": "id",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checking of updated list TO DO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"const board_id = pm.globals.get(\"board_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if name of board is 'TO DO'\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(\"TO DO\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Collect id from the response\", function () {\r",
+							"    pm.globals.set(\"todo_id\",jsonData.id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list has been created in the correct board\", function () {\r",
+							"    pm.expect(jsonData.idBoard).to.eql(board_id);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.pos).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json; charset=utf-8\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Server header is globaledge-envoy\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Access-Control-Allow-Headers')).to.eql('Authorization, Accept, Content-Type');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists/{{todo_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"lists",
+						"{{todo_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Move card from list TO DO to list IN PROGRESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"const board_id = pm.globals.get(\"board_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list has been created in the correct board\", function () {\r",
+							"    pm.expect(jsonData.idBoard).to.eql(board_id);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.pos).to.be.a('number');\r",
+							"    pm.expect(jsonData.due).to.be.null;\r",
+							"    pm.expect(jsonData.isTemplate).to.be.false;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"X-Content-Type-Optionse header is nosniff\", () => {\r",
+							"  pm.expect(pm.response.headers.get('X-Content-Type-Options')).to.eql('nosniff');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Server header is globaledge-envoy\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Server')).to.eql('globaledge-envoy');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/cards/{{writesmoketestcard_id}}?idList={{inprogress_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"cards",
+						"{{writesmoketestcard_id}}"
+					],
+					"query": [
+						{
+							"key": "idList",
+							"value": "{{inprogress_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checking if card has been moved to correct list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"const board_id = pm.globals.get(\"board_id\");\r",
+							"const inprogress_id = pm.globals.get(\"inprogress_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list has been created in the correct board\", function () {\r",
+							"    pm.expect(jsonData.idBoard).to.eql(board_id);\r",
+							"})\r",
+							"pm.test(\"Check if the list has been moved on the correct list\", function () {\r",
+							"    pm.expect(jsonData.idList).to.eql(inprogress_id);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.id).to.have.lengthOf(24);\r",
+							"    pm.expect(jsonData.pos).to.be.a('number');\r",
+							"    pm.expect(jsonData.due).to.be.null;\r",
+							"    pm.expect(jsonData.isTemplate).to.be.false;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"X-Content-Type-Optionse header is nosniff\", () => {\r",
+							"  pm.expect(pm.response.headers.get('X-Content-Type-Options')).to.eql('nosniff');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Server header is globaledge-envoy\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Server')).to.eql('globaledge-envoy');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/cards/{{writesmoketestcard_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"cards",
+						"{{writesmoketestcard_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invite a member to a board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/boards/{{board_id}}/members?key={{trelloKey}}&token={{trelloToken}}&email={{email}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{board_id}}",
+						"members"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{trelloKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}"
+						},
+						{
+							"key": "email",
+							"value": "{{email}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a card 'Write Smoke test for Trello App'",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Referrer-Policy is correct\", function () {\r",
+							"   pm.response.to.have.header(\"Referrer-Policy\");\r",
+							"   pm.response.to.be.header(\"Referrer-Policy\", \"strict-origin-when-cross-origin\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"X-Rate-Limit-Api-Key-Interval-Ms\", () => {\r",
+							"  pm.expect(pm.response.headers.get('X-Rate-Limit-Api-Key-Interval-Ms')).to.eql('10000');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/cards/{{writesmoketestcard_id}}?key={{trelloKey}}&token={{trelloToken}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"cards",
+						"{{writesmoketestcard_id}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{trelloKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checking if card 'Write Smoke test for Trello App' has been deleted",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404 Not Found\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/cards/{{writesmoketestcard_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"cards",
+						"{{writesmoketestcard_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a card 'Execute the smoke test'",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"   pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"X-Xss-Protection is correct\", function () {\r",
+							"   pm.response.to.have.header(\"X-Xss-Protection\");\r",
+							"   pm.response.to.be.header(\"X-Xss-Protection\", \"1; mode=block\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/cards/{{executesmoketest_id}}?key={{trelloKey}}&token={{trelloToken}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"cards",
+						"{{executesmoketest_id}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{trelloKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checking if card 'Execute the smoke test' has been deleted",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404 Not Found\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/cards/{{executesmoketest_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"cards",
+						"{{executesmoketest_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"X-Content-Type-Optionse header is nosniff\", () => {\r",
+							"  pm.expect(pm.response.headers.get('X-Content-Type-Options')).to.eql('nosniff');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if Cache-Control is correct\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Cache-Control')).to.eql('max-age=0, must-revalidate, no-cache, no-store');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Referrer-Policy is correct\", function () {\r",
+							"   pm.response.to.have.header(\"Referrer-Policy\");\r",
+							"   pm.response.to.be.header(\"Referrer-Policy\", \"strict-origin-when-cross-origin\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"X-Rate-Limit-Api-Key-Interval-Ms\", () => {\r",
+							"  pm.expect(pm.response.headers.get('X-Rate-Limit-Api-Key-Interval-Ms')).to.eql('10000');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/boards/{{board_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{board_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checking if board has been deleted",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404 Not Found\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "tokenSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{trelloSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{trelloKey}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/boards/{{board_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{board_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth1",
+		"oauth1": [
+			{
+				"key": "token",
+				"value": "{{trelloToken}}",
+				"type": "string"
+			},
+			{
+				"key": "tokenSecret",
+				"value": "{{trelloSecret}}",
+				"type": "string"
+			},
+			{
+				"key": "consumerSecret",
+				"value": "{{trelloSecret}}",
+				"type": "string"
+			},
+			{
+				"key": "consumerKey",
+				"value": "{{trelloKey}}",
+				"type": "string"
+			},
+			{
+				"key": "signatureMethod",
+				"value": "HMAC-SHA1",
+				"type": "string"
+			},
+			{
+				"key": "version",
+				"value": "1.0",
+				"type": "string"
+			},
+			{
+				"key": "addParamsToHeader",
+				"value": false,
+				"type": "boolean"
+			},
+			{
+				"key": "addEmptyParamsToSign",
+				"value": false,
+				"type": "boolean"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
