@@ -1,5 +1,5 @@
 # trello-api-test
-Smoke test for testing Trello API with Postman.
+Testing Trello API with Postman.
 ## General info
 In this test by abstracting low-level commands, and by structuring request formation you will be able to create a board, crate a list and cards in your board, also you will be able to move card from one list to another, invite a member, and delete all parts of board(cards, lists), and at the end of collection you can delete a board. 
 ## Prerequisites
